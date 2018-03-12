@@ -9,22 +9,34 @@ const radius = 75;
 const startAngle = 0;
 const endAngle = 2* Math.PI;
 let cx, cy;
-//let color = randomColor();
 
-//Draw the eggs on the canvas
-function draw() {
-    ctx.clearRect(0,0, CANVAS.width, CANVAS.height);
+//Create the egg shape
+function drawEgg() {
     for(let i = 0; i < 15; i++) {
         ctx.strokeStyle = randomColor();
         ctx.fillStyle = randomColor();
         cx = Math.random() * 500;
         cy = Math.random() * 500;
+
         ctx.beginPath();
-        ctx.arc(cx,cy,radius,startAngle,endAngle, false);
-        ctx.fill();
+        ctx.ellipse(cx, cy, 50, 75, 45 * Math.PI/180, 0, 2 * Math.PI);
         ctx.stroke();
+        ctx.moveTo(0, 200);
+        ctx.stroke();
+        ctx.fill();
+
+        // ctx.beginPath();
+        // ctx.arc(cx,cy,radius,startAngle,endAngle, false);
+        // ctx.fill();
+        // ctx.stroke();
         ctx.closePath();
     }
+}
+
+//Draw the eggs on the canvas
+function draw() {
+    ctx.clearRect(0,0, CANVAS.width, CANVAS.height);
+    drawEgg();
 }
 
 //Change to random colors
@@ -33,6 +45,3 @@ function randomColor() {
     return 'rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',' + r().toFixed(1) + ')';
 }
 
-function clearCanvas() {
-    ctx.clearRect(0,0, CANVAS.width, CANVAS.height);
-}
