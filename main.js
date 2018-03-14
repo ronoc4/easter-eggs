@@ -5,30 +5,43 @@
  */
 const CANVAS = document.getElementById('ee-canvas');
 const ctx = CANVAS.getContext('2d');
-const radius = 75;
+const radiusX = 65;
+const radiusY = 90;
+const rotation = 180 * Math.PI/180;
 const startAngle = 0;
 const endAngle = 2* Math.PI;
 let cx, cy;
+let userInput = "";
+let totalEggs = getUserInput();
+
+let userClick = document.getElementById("add-eggs-btn");
+
+window.onload = function () {
+    userClick.onclick = function () {
+        console.log(totalEggs);
+        draw();
+    };
+};
+
+function getUserInput() {
+    userInput = document.getElementById("txtNumEggs").value;
+    return 12;
+}
 
 //Create the egg shape
 function drawEgg() {
-    for(let i = 0; i < 15; i++) {
+    for(let i = 0; i < totalEggs; i++) {
         ctx.strokeStyle = randomColor();
         ctx.fillStyle = randomColor();
         cx = Math.random() * 500;
         cy = Math.random() * 500;
 
         ctx.beginPath();
-        ctx.ellipse(cx, cy, 50, 75, 45 * Math.PI/180, 0, 2 * Math.PI);
+        ctx.ellipse(cx, cy, radiusX, radiusY, rotation, startAngle, endAngle);
         ctx.stroke();
         ctx.moveTo(0, 200);
         ctx.stroke();
         ctx.fill();
-
-        // ctx.beginPath();
-        // ctx.arc(cx,cy,radius,startAngle,endAngle, false);
-        // ctx.fill();
-        // ctx.stroke();
         ctx.closePath();
     }
 }
